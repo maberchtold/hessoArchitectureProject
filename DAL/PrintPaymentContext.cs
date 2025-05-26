@@ -17,7 +17,7 @@ namespace DAL
             if (!builder.IsConfigured)
             {
                 // fallback, usually unused when configured in Program.cs
-                builder.UseSqlServer("Server=192.168.1.166;Database=DigitecDB;User Id=sa;Password=Bfo12345;TrustServerCertificate=True;");
+                builder.UseSqlServer("Server=192.168.1.166;Database=PrintDB;User Id=sa;Password=Bfo12345;TrustServerCertificate=True;");
             }
         }
 

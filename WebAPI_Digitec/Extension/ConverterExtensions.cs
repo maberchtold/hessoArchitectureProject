@@ -1,38 +1,28 @@
-﻿namespace WebAPI_Digitec.Extension
+﻿namespace WebAPI_PrintPayment.Extension
 {
     public static class ConverterExtensions
     {
-        public static DAL.Models.Item ToDAL(this WebAPI_Digitec.Models.ItemM itemM)
+        public static DAL.Models.PrintQuota ToDAL(this WebAPI_PrintPayment.Models.PrintQuotaM quotaM)
         {
-            return new DAL.Models.Item
+            return new DAL.Models.PrintQuota
             {
-                ItemId = itemM.Id,
-                Name = itemM.Name,
-                Description = itemM.Description,
-                Price = itemM.Price,
-                EmployeeId = itemM.EmployeeId
+                Id = quotaM.Id,
+                UID = quotaM.UID,
+                Username = quotaM.Username,
+                NbPages = quotaM.NbPages,
+                CreatedAt = quotaM.CreatedAt
             };
         }
 
-        public static WebAPI_Digitec.Models.ItemM ToModel(this DAL.Models.Item item)
+        public static WebAPI_PrintPayment.Models.PrintQuotaM ToModel(this DAL.Models.PrintQuota quota)
         {
-            return new WebAPI_Digitec.Models.ItemM
+            return new WebAPI_PrintPayment.Models.PrintQuotaM
             {
-                Id = item.ItemId,
-                Name = item.Name,
-                Description = item.Description,
-                Price = item.Price,
-                EmployeeId = item.EmployeeId
-            };
-        }
-
-        public static WebAPI_Digitec.Models.EmployeeM ToModel(this DAL.Models.Employee employee)
-        {
-            return new WebAPI_Digitec.Models.EmployeeM
-            {
-                EmployeeId = employee.EmployeeId,
-                Lastname = employee.Lastname,
-                Firstname = employee.Firstname
+                Id = quota.Id,
+                UID = quota.UID,
+                Username = quota.Username,
+                NbPages = quota.NbPages,
+                CreatedAt = quota.CreatedAt
             };
         }
     }

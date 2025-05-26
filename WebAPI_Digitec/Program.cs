@@ -1,30 +1,30 @@
+// File: Program.cs
 using DAL;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using WebAPI_Digitec.Business;
+using WebAPI_PrintPayment.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IComputationHelper, ComputationHelper>();
+// Register application services
+builder.Services.AddScoped<IPrintPaymentHelper, PrintPaymentHelper>();
 
-builder.Services.AddDbContext<DigitecContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configure EF Core with SQL Server
+builder.Services.AddDbContext<PrintPaymentContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope()) { 
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
     var services = scope.ServiceProvider;
-    seed(services);
+    Seed(services);
 }
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -41,10 +41,11 @@ app.MapControllers();
 
 app.Run();
 
-
-void seed(IServiceProvider serviceProvider)
+// Local seed function
+void Seed(IServiceProvider serviceProvider)
 {
-    using var context = new DigitecContext(serviceProvider.GetRequiredService<DbContextOptions<DigitecContext>>());
+    using var context = new PrintPaymentContext(
+        serviceProvider.GetRequiredService<DbContextOptions<PrintPaymentContext>>());
 
-    context.Database.EnsureCreated(); //.Migrate()
+    context.Database.EnsureCreated(); // Optionally use .Migrate() in production
 }
