@@ -6,6 +6,8 @@ namespace DAL
     public class PrintPaymentContext : DbContext
     {
         public DbSet<PrintQuota> PrintQuotas { get; set; }
+        public DbSet<Student> Students { get; set; }
+
 
         public PrintPaymentContext(DbContextOptions<PrintPaymentContext> options)
             : base(options)
@@ -23,12 +25,18 @@ namespace DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Indexes for lookup performance
-            modelBuilder.Entity<PrintQuota>()
-                .HasIndex(p => p.UID);
+            modelBuilder.Entity<Student>()
+                .HasIndex(s => s.UID)
+                .IsUnique();
+
+            modelBuilder.Entity<Student>()
+                .HasIndex(s => s.Username)
+                .IsUnique();
 
             modelBuilder.Entity<PrintQuota>()
-                .HasIndex(p => p.Username);
+                .HasOne(pq => pq.Student)
+                .WithMany(s => s.PrintQuotas)
+                .HasForeignKey(pq => pq.StudentId);
         }
     }
 }

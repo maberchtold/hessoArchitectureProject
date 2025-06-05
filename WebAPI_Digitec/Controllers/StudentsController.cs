@@ -1,6 +1,8 @@
 ﻿using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI_PrintPayment.Business;
+using WebAPI_PrintPayment.Extension;
+using WebAPI_PrintPayment.Models;
 
 namespace WebAPI_PrintPayment.Controllers
 {
@@ -16,24 +18,26 @@ namespace WebAPI_PrintPayment.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult<List<PrintQuota>>> GetAll()
+        public async Task<ActionResult<List<StudentQuotaM>>> GetAllSummaries()
         {
-            var quotas = await _helper.GetAllQuotasAsync();
-            return Ok(quotas);
+            var summaries = await _helper.GetStudentQuotaSummariesAsync();
+            return Ok(summaries);
         }
 
+
         [HttpGet("{uidOrUsername}")]
-        public async Task<ActionResult<List<PrintQuota>>> GetByStudent(string uidOrUsername)
+        public async Task<ActionResult<StudentQuotaM>> GetStudentSummary(string uidOrUsername)
         {
             try
             {
-                var quotas = await _helper.GetQuotasByStudentAsync(uidOrUsername);
-                return Ok(quotas);
+                var student = await _helper.GetStudentQuotaSummaryAsync(uidOrUsername);
+                return Ok(student);
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
         }
+
     }
 }

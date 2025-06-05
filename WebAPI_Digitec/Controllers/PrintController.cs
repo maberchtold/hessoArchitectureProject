@@ -1,6 +1,7 @@
 ﻿using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI_PrintPayment.Business;
+using WebAPI_PrintPayment.Extension;
 
 namespace WebAPI_PrintPayment.Controllers
 {
@@ -21,11 +22,11 @@ namespace WebAPI_PrintPayment.Controllers
             try
             {
                 var quota = await _helper.AddQuotaByUidAsync(uid, amount);
-                return Ok(quota);
+                return Ok(quota.ToModel());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -35,11 +36,11 @@ namespace WebAPI_PrintPayment.Controllers
             try
             {
                 var quota = await _helper.AddQuotaByUsernameAsync(username, amount);
-                return Ok(quota);
+                return Ok(quota.ToModel());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }
