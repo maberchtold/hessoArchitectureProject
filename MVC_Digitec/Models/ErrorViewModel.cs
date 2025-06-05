@@ -1,4 +1,4 @@
-namespace MVC_Digitec.Models
+﻿namespace MVC_PrintPayment.Models
 {
     public class ErrorViewModel
     {

@@ -1,0 +1,24 @@
+﻿@model MVC_PrintPayment.Models.AddQuotaByUidM
+
+@{
+    ViewData["Title"] = "Add Quota by UID";
+}
+
+<h2>Add Quota by UID</h2>
+
+<form asp-action="AddQuotaByUid" method="post">
+    <div class="form-group">
+        <label asp-for="UID"></label>
+        <input asp-for="UID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount"></label>
+        <input asp-for="Amount" class="form-control" type="number" step="0.01" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.Result))
+{
+    <div class="alert alert-info mt-3">@ViewBag.Result</div>
+}

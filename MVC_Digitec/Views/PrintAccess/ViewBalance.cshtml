@@ -1,0 +1,28 @@
+﻿@model MVC_PrintPayment.Models.BalanceQueryM
+
+@{
+    ViewData["Title"] = "Check Print Quota";
+}
+
+<h2>View Student Balance</h2>
+
+<form asp-action="ViewBalance" method="post">
+    <div class="form-group">
+        <label>UID</label>
+        <input asp-for="UID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>or Username</label>
+        <input asp-for="Username" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Check Balance</button>
+</form>
+
+@if (ViewBag.Balance != null)
+{
+    var result = (MVC_PrintPayment.Models.StudentQuotaM)ViewBag.Balance;
+
+    <div class="alert alert-info mt-3">
+        <strong>@result.Username</strong> has <strong>@result.TotalPages</strong> pages.
+    </div>
+}
