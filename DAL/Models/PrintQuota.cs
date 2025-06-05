@@ -9,10 +9,12 @@ namespace DAL.Models
     public class PrintQuota
     {
         public int Id { get; set; }
-        public string? UID { get; set; }        // used by Epurse
-        public string? Username { get; set; }   // used by Faculty
+        public int StudentId { get; set; }
+        public Student Student { get; set; } = null!;
+
         public int NbPages { get; set; }
         public DateTime CreatedAt { get; set; }
     }
+
 
 }

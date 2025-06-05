@@ -1,28 +1,34 @@
-﻿namespace WebAPI_PrintPayment.Extension
+﻿using DAL.Models;
+using WebAPI_PrintPayment.Models;
+
+namespace WebAPI_PrintPayment.Extension
 {
     public static class ConverterExtensions
     {
-        public static DAL.Models.PrintQuota ToDAL(this WebAPI_PrintPayment.Models.PrintQuotaM quotaM)
+        public static PrintQuotaM ToModel(this PrintQuota quota)
         {
-            return new DAL.Models.PrintQuota
+            return new PrintQuotaM
             {
-                Id = quotaM.Id,
-                UID = quotaM.UID,
-                Username = quotaM.Username,
-                NbPages = quotaM.NbPages,
-                CreatedAt = quotaM.CreatedAt
+                Id = quota.Id,
+                UID = quota.Student.UID,
+                Username = quota.Student.Username,
+                NbPages = quota.NbPages,
+                CreatedAt = quota.CreatedAt
             };
         }
 
-        public static WebAPI_PrintPayment.Models.PrintQuotaM ToModel(this DAL.Models.PrintQuota quota)
+        public static PrintQuota ToDAL(this PrintQuotaM quotaM)
         {
-            return new WebAPI_PrintPayment.Models.PrintQuotaM
+            return new PrintQuota
             {
-                Id = quota.Id,
-                UID = quota.UID,
-                Username = quota.Username,
-                NbPages = quota.NbPages,
-                CreatedAt = quota.CreatedAt
+                Id = quotaM.Id,
+                Student = new Student
+                {
+                    UID = quotaM.UID,
+                    Username = quotaM.Username
+                },
+                NbPages = quotaM.NbPages,
+                CreatedAt = quotaM.CreatedAt
             };
         }
     }

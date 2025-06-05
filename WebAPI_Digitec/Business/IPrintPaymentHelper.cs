@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using WebAPI_PrintPayment.Models;
 
 namespace WebAPI_PrintPayment.Business
 {
@@ -8,5 +9,9 @@ namespace WebAPI_PrintPayment.Business
         Task<PrintQuota> AddQuotaByUsernameAsync(string username, float amountCHF);
         Task<List<PrintQuota>> GetQuotasByStudentAsync(string uidOrUsername);
         Task<List<PrintQuota>> GetAllQuotasAsync();
+        Task<List<StudentQuotaM>> GetStudentQuotaSummariesAsync();
+        Task<StudentQuotaM> GetStudentQuotaSummaryAsync(string uidOrUsername);
+
+
     }
 }
