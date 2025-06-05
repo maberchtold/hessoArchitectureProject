@@ -1,0 +1,43 @@
+@startuml
+class ConverterExtensions <<static>> {
+    + {static} ToDAL(quotaM:WebAPI_PrintPayment.Models.PrintQuotaM) : DAL.Models.PrintQuota
+    + {static} ToModel(quota:DAL.Models.PrintQuota) : WebAPI_PrintPayment.Models.PrintQuotaM
+}
+class PrintPaymentHelper {
+    - <<readonly>> _context : PrintPaymentContext
+    + PrintPaymentHelper(context:PrintPaymentContext)
+    - ConvertCHFToPages(amountCHF:float) : int
+    + <<async>> AddQuotaByUidAsync(uid:string, amountCHF:float) : Task<PrintQuota>
+    + <<async>> AddQuotaByUsernameAsync(username:string, amountCHF:float) : Task<PrintQuota>
+    + <<async>> GetQuotasByStudentAsync(uidOrUsername:string) : Task<List<PrintQuota>>
+    + <<async>> GetAllQuotasAsync() : Task<List<PrintQuota>>
+}
+IPrintPaymentHelper <|-- PrintPaymentHelper
+interface IPrintPaymentHelper {
+    AddQuotaByUidAsync(uid:string, amountCHF:float) : Task<PrintQuota>
+    AddQuotaByUsernameAsync(username:string, amountCHF:float) : Task<PrintQuota>
+    GetQuotasByStudentAsync(uidOrUsername:string) : Task<List<PrintQuota>>
+    GetAllQuotasAsync() : Task<List<PrintQuota>>
+}
+class PrintQuotaM {
+    + Id : int <<get>> <<set>>
+    + UID : string? <<get>> <<set>>
+    + Username : string? <<get>> <<set>>
+    + NbPages : int <<get>> <<set>>
+    + CreatedAt : DateTime <<get>> <<set>>
+}
+class StudentsController {
+    - <<readonly>> _helper : IPrintPaymentHelper
+    + StudentsController(helper:IPrintPaymentHelper)
+    + <<async>> GetAll() : Task<ActionResult<List<PrintQuota>>>
+    + <<async>> GetByStudent(uidOrUsername:string) : Task<ActionResult<List<PrintQuota>>>
+}
+ControllerBase <|-- StudentsController
+class PrintController {
+    - <<readonly>> _helper : IPrintPaymentHelper
+    + PrintController(helper:IPrintPaymentHelper)
+    + <<async>> AddQuotaByUid(uid:string, amount:float) : Task<ActionResult<PrintQuota>>
+    + <<async>> AddQuotaByUsername(username:string, amount:float) : Task<ActionResult<PrintQuota>>
+}
+ControllerBase <|-- PrintController
+@enduml

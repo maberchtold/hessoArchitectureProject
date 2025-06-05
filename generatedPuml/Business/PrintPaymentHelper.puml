@@ -1,0 +1,12 @@
+@startuml
+class PrintPaymentHelper {
+    - <<readonly>> _context : PrintPaymentContext
+    + PrintPaymentHelper(context:PrintPaymentContext)
+    - ConvertCHFToPages(amountCHF:float) : int
+    + <<async>> AddQuotaByUidAsync(uid:string, amountCHF:float) : Task<PrintQuota>
+    + <<async>> AddQuotaByUsernameAsync(username:string, amountCHF:float) : Task<PrintQuota>
+    + <<async>> GetQuotasByStudentAsync(uidOrUsername:string) : Task<List<PrintQuota>>
+    + <<async>> GetAllQuotasAsync() : Task<List<PrintQuota>>
+}
+IPrintPaymentHelper <|-- PrintPaymentHelper
+@enduml

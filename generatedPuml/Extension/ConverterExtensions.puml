@@ -1,0 +1,6 @@
+@startuml
+class ConverterExtensions <<static>> {
+    + {static} ToDAL(quotaM:WebAPI_PrintPayment.Models.PrintQuotaM) : DAL.Models.PrintQuota
+    + {static} ToModel(quota:DAL.Models.PrintQuota) : WebAPI_PrintPayment.Models.PrintQuotaM
+}
+@enduml

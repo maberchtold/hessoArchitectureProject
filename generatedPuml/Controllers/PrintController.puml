@@ -1,0 +1,9 @@
+@startuml
+class PrintController {
+    - <<readonly>> _helper : IPrintPaymentHelper
+    + PrintController(helper:IPrintPaymentHelper)
+    + <<async>> AddQuotaByUid(uid:string, amount:float) : Task<ActionResult<PrintQuota>>
+    + <<async>> AddQuotaByUsername(username:string, amount:float) : Task<ActionResult<PrintQuota>>
+}
+ControllerBase <|-- PrintController
+@enduml

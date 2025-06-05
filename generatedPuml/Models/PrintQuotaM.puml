@@ -1,0 +1,9 @@
+@startuml
+class PrintQuotaM {
+    + Id : int <<get>> <<set>>
+    + UID : string? <<get>> <<set>>
+    + Username : string? <<get>> <<set>>
+    + NbPages : int <<get>> <<set>>
+    + CreatedAt : DateTime <<get>> <<set>>
+}
+@enduml

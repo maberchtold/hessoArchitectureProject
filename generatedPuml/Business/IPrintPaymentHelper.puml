@@ -1,0 +1,8 @@
+@startuml
+interface IPrintPaymentHelper {
+    AddQuotaByUidAsync(uid:string, amountCHF:float) : Task<PrintQuota>
+    AddQuotaByUsernameAsync(username:string, amountCHF:float) : Task<PrintQuota>
+    GetQuotasByStudentAsync(uidOrUsername:string) : Task<List<PrintQuota>>
+    GetAllQuotasAsync() : Task<List<PrintQuota>>
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class StudentsController {
+    - <<readonly>> _helper : IPrintPaymentHelper
+    + StudentsController(helper:IPrintPaymentHelper)
+    + <<async>> GetAll() : Task<ActionResult<List<PrintQuota>>>
+    + <<async>> GetByStudent(uidOrUsername:string) : Task<ActionResult<List<PrintQuota>>>
+}
+ControllerBase <|-- StudentsController
+@enduml
