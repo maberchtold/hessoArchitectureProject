@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI_PrintPayment", "WebAPI_Digitec\WebAPI_PrintPayment.csproj", "{D5280C5D-A994-44EF-B9F1-20C18FDFF187}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_Digitec", "MVC_Digitec\MVC_Digitec.csproj", "{BCA2DD35-0AA7-432F-85BB-7E6F5784366E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_PrintPayment", "MVC_Digitec\MVC_PrintPayment.csproj", "{BCA2DD35-0AA7-432F-85BB-7E6F5784366E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
