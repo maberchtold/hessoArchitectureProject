@@ -1,6 +1,0 @@
-@WebAPI_Digitec_HostAddress = http://localhost:5139
-
-GET {{WebAPI_Digitec_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
